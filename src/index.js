@@ -1,36 +1,36 @@
-const { Client, Intents } = require("discord.js");
+const { Client, Intents, Collection } = require("discord.js");
 // the new client format
 
 const client = new Client({
 	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
 }); // will add more intents
 
+client.events = new Collection();
+
 //config
-const { prefix } = require("../config");
+const { prefix, version } = require("../config");
 //token
 const { token } = require("../secure/token");
 
 //ready event
 
+["event"].forEach((hand) => {
+	require(`./utils/${hand}`)(client);
+});
+
 client.on("ready", async () => {
-	console.log("Ready!");
+	await client.events.get("ready").execute(version);
 });
 
 //message event
 client.on("messageCreate", async (message) => {
-	if (message.author.bot) return;
-	if (!message.content.toLowerCase().startsWith(prefix)) return;
-
-	let args = message.content.substring(prefix.length).split(" ");
-
-	switch (args[0]) {
-		case "hello":
-			message.reply({
-				content: "Hello!",
-				allowedMentions: { repliedUser: false },
-			});
-			break;
-	}
+	client.config = {
+		prefix,
+		version,
+	};
+	await client.events
+		.get("messageCreate")
+		.execute(message, client, MessageEmbed);
 });
 
 //logs in bot
