@@ -7,13 +7,9 @@ module.exports = {
 
 		let args = message.content.substring(prefix.length).split(" ");
 
-		switch (args[0]) {
-			case "hello":
-				message.reply({
-					content: "Hello!",
-					allowedMentions: { repliedUser: false },
-				});
-				break;
-		}
+		const cmd = args[0].toLowerCase();
+		const command = client.commands.get(`${cmd}`);
+		if (!command) return;
+		command.execute(client, message, args, MessageEmbed);
 	},
 };
