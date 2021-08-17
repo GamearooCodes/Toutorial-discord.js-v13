@@ -1,4 +1,4 @@
-const { Client, Intents, Collection } = require("discord.js");
+const { Client, Intents, Collection, MessageEmbed } = require("discord.js");
 // the new client format
 
 const client = new Client({
@@ -7,6 +7,8 @@ const client = new Client({
 
 client.events = new Collection();
 
+client.commands = new Collection();
+
 //config
 const { prefix, version } = require("../config");
 //token
@@ -14,7 +16,7 @@ const { token } = require("../secure/token");
 
 //ready event
 
-["event"].forEach((hand) => {
+["event", "command"].forEach((hand) => {
 	require(`./utils/${hand}`)(client);
 });
 
