@@ -5,7 +5,7 @@ module.exports = {
 	name: "8ball",
 	desc: "ask the bot a question",
 	category: "Fun",
-	usage: "hello",
+	usage: "8ball",
 	async execute(client, message, args, MessageEmbed) {
 		if (!args[3])
 			return message.reply({
