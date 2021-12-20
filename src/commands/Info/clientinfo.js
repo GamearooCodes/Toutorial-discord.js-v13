@@ -9,7 +9,7 @@ module.exports = {
 	category: "Information",
 	usage: "clientinfo",
 	plugin: "info",
-	flag: [],
+	
 	async execute(client, message, args, MessageEmbed) {
 		let memused;
 		let memtotal;
@@ -43,7 +43,7 @@ module.exports = {
 		});
 
 		seconds = Number(await si.time().uptime);
-        seconds2 = Number(await client.uptime);
+        seconds2 = Number(await client.uptime/1000);
 
 		var d = Math.floor(seconds / (3600 * 24));
 		var h = Math.floor((seconds % (3600 * 24)) / 3600);
