@@ -1,3 +1,3 @@
 exports.prefix = "=";
-exports.version = "1.0.0-dev.4";
-exports.apiversion = "v2";
+exports.version = "1.0.0-dev.5";
+exports.apiversion = "v3";
