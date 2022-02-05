@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { api8ball } = require("ram-api.js");
+const { api8ball, executeconsole } = require("ram-api.js");
 const { apiversion, ramapiversion, ramapikey } = require("../../../config");
 
 module.exports = {
@@ -13,12 +13,16 @@ module.exports = {
 				content: "Please ask a 3 or more word question!",
 			});
 
-		await api8ball(ramapiversion, ramapikey).then((data) => {
-			//error it by adding .json() ^
-			message.reply({
-				content: data.text,
-				allowedMentions: { repliedUser: false },
+		await api8ball(ramapiversion, ramapikey)
+			.then((data) => {
+				//error it by adding .json() ^
+				message.reply({
+					content: data.text,
+					allowedMentions: { repliedUser: false },
+				});
+			})
+			.catch((err) => {
+				executeconsole(err, true, false);
 			});
-		});
 	},
 };

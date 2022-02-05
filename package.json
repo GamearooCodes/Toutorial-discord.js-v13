@@ -1,29 +1,29 @@
 {
-  "name": "tutorial-backend",
-  "version": "1.0.0",
-  "main": "src/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "axios": "^0.21.4",
-    "discord.js": "^13.1.0",
-    "moment": "^2.29.1",
-    "mongoose": "^5.13.7",
-    "ram-api.js": "^2.0.1",
-    "systeminformation": "^5.9.17",
-    "winston": "^3.3.3",
-    "winston-console-format": "^1.0.8"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/GamearooCodes/Toutorial-discord.js-v13.git"
-  },
-  "bugs": {
-    "url": "https://github.com/GamearooCodes/Toutorial-discord.js-v13/issues"
-  },
-  "homepage": "https://github.com/GamearooCodes/Toutorial-discord.js-v13#readme",
-  "description": ""
+	"name": "tutorial-backend",
+	"version": "1.0.0",
+	"main": "src/index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"axios": "^0.21.4",
+		"discord.js": "^13.1.0",
+		"moment": "^2.29.1",
+		"mongoose": "^5.13.7",
+		"ram-api.js": "^4.0.0",
+		"systeminformation": "^5.9.17",
+		"winston": "^3.3.3",
+		"winston-console-format": "^1.0.8"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/GamearooCodes/Toutorial-discord.js-v13.git"
+	},
+	"bugs": {
+		"url": "https://github.com/GamearooCodes/Toutorial-discord.js-v13/issues"
+	},
+	"homepage": "https://github.com/GamearooCodes/Toutorial-discord.js-v13#readme",
+	"description": ""
 }
