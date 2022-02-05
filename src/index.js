@@ -1,9 +1,9 @@
+//require discord.js v13
 const { Client, Intents, Collection, MessageEmbed } = require("discord.js");
-// the new client format
 
 const client = new Client({
 	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
-}); // will add more intents
+}); //will add more intents
 
 client.events = new Collection();
 
@@ -14,14 +14,14 @@ const { prefix, version } = require("../config");
 //token
 const { token } = require("../secure/token");
 
-//ready event
-
 ["event", "command"].forEach((hand) => {
-	require(`./utils/${hand}`)(client);
+	require(`./Utils/${hand}`)(client);
 });
 
+//ready event
+
 client.on("ready", async () => {
-	await client.events.get("ready").execute(version);
+	await client.events.get("ready").execute(version, client);
 });
 
 //message event
@@ -35,6 +35,6 @@ client.on("messageCreate", async (message) => {
 		.execute(message, client, MessageEmbed);
 });
 
-//logs in bot
+//logs in the bot
 
 client.login(token);

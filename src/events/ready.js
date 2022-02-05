@@ -1,49 +1,56 @@
 const axios = require("axios");
-const { apiversion } = require("ram-api.js");
-const { createLogger, format, transports, level } = require("winston");
-const { consoleFormat } = require("winston-console-format");
-const { ramapiversion } = require("../../config");
+const { apiversion, executeconsole, apiversioncheck } = require("ram-api.js");
 
-const logger = createLogger({
-	level: "silly",
-	format: format.combine(
-		format.timestamp(),
-		format.ms(),
-		format.errors({ stack: true }),
-		format.splat(),
-		format.json()
-	),
-	defaultMeta: { service: "Test" },
-	transports: [
-		new transports.Console({
-			format: format.combine(
-				format.colorize({ all: true }),
-				format.padLevels(),
-				consoleFormat({
-					showMeta: true,
-					metaStrip: ["timestamp", "service"],
-					inspectOptions: {
-						depth: Infinity,
-						colors: true,
-						maxArrayLength: Infinity,
-						breakLength: 120,
-						compact: Infinity,
-					},
-				})
-			),
-		}),
-	],
-});
+const { ramapiversion } = require("../../config");
+const { Client } = require("discord.js");
 
 module.exports = {
 	name: "ready",
-	async execute(version) {
-		console.log(`Ready! On Version: ${version}`);
+	/**
+	 *
+	 * @param {*} version
+	 * @param {Client} client
+	 */
+	async execute(version, client) {
+		executeconsole(`Ready! On Version: ${version}`, false, false);
 
-		apiversion(ramapiversion);
+		client.user.setPresence({
+			activities: [
+				{
+					name: "Tutorials",
+					type: "WATCHING",
+				},
+			],
+			status: "dnd",
+		});
+
+		await check();
 
 		setInterval(() => {
-			apiversion(ramapiversion);
+			check();
 		}, 60000);
 	},
 };
+
+async function check() {
+	apiversioncheck(ramapiversion).then((data) => {
+		let { version, supported, outdated, latest } = data;
+
+		if (outdated) {
+			if (!supported) {
+				return executeconsole(
+					`${version} is no longer supported latest version is ${latest}`,
+					true,
+					false
+				);
+			}
+			executeconsole(
+				`${version} is outdated but still supported latest version is ${latest}`,
+				false,
+				true
+			);
+		} else {
+			executeconsole(`${version} is the latest version for ram api`);
+		}
+	});
+}
