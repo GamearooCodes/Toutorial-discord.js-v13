@@ -21,7 +21,7 @@ const { token } = require("../secure/token");
 });
 
 client.on("ready", async () => {
-	await client.events.get("ready").execute(version, client);
+	await client.events.get("ready").execute(version);
 });
 
 //message event

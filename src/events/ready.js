@@ -3,7 +3,6 @@ const { apiversion } = require("ram-api.js");
 const { createLogger, format, transports, level } = require("winston");
 const { consoleFormat } = require("winston-console-format");
 const { ramapiversion } = require("../../config");
-const { Client } = require("discord.js");
 
 const logger = createLogger({
 	level: "silly",
@@ -38,23 +37,8 @@ const logger = createLogger({
 
 module.exports = {
 	name: "ready",
-	/**
-	 *
-	 * @param {*} version
-	 * @param {Client} client
-	 */
-	async execute(version, client) {
+	async execute(version) {
 		console.log(`Ready! On Version: ${version}`);
-
-		client.user.setPresence({
-			activities: [
-				{
-					name: "Tutorials",
-					type: "WATCHING",
-				},
-			],
-			status: "dnd",
-		});
 
 		apiversion(ramapiversion);
 
