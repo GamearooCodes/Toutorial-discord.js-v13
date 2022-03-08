@@ -7,14 +7,18 @@ const client = new Client({
 
 client.events = new Collection();
 
+require("../rpc");
+
 client.commands = new Collection();
+
+client.slash = new Collection();
 
 //config
 const { prefix, version } = require("../config");
 //token
 const { token } = require("../secure/token");
 
-["event", "command"].forEach((hand) => {
+["event", "command", "slash"].forEach((hand) => {
 	require(`./Utils/${hand}`)(client);
 });
 
@@ -33,6 +37,13 @@ client.on("messageCreate", async (message) => {
 	await client.events
 		.get("messageCreate")
 		.execute(message, client, MessageEmbed);
+});
+
+client.on("interactionCreate", (int) => {
+	client.slashconfig = {
+		version,
+	};
+	client.events.get("int").run(client, int);
 });
 
 //logs in the bot

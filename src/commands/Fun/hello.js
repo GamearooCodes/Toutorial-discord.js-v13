@@ -1,5 +1,5 @@
 const { Client, MessageEmbed, Message } = require("discord.js");
-const { apihello, executeconsole } = require("ram-api.js");
+const { apihello, executeconsole, hello } = require("ram-api.js");
 const { ramapiversion } = require("../../../config");
 const { ramapikey } = require("../../../secure/token");
 
@@ -15,7 +15,7 @@ module.exports = {
 	 * @param {MessageEmbed} MessageEmbed
 	 */
 	async execute(client, message, args, MessageEmbed) {
-		await apihello(ramapiversion, "test")
+		await hello(ramapiversion, ramapikey, "spanish")
 			.then((data) => {
 				message.reply({
 					content: data.text,
