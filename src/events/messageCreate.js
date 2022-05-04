@@ -1,3 +1,5 @@
+const { Client, Intents, Collection, Permissions } = require("discord.js");
+
 module.exports = {
 	name: "messageCreate",
 	async execute(message, client, MessageEmbed) {
@@ -11,6 +13,10 @@ module.exports = {
 		const cmd = args[0].toLowerCase();
 		const command = client.commands.get(`${cmd}`);
 		if (!command) return;
+
+		const permissions = new Permissions(command.perm);
+
+            if(!message.member.permissions.has(permissions)) return message.reply(`Missing ${permissions.toArray()}`).catch(err => {});
 		command.execute(client, message, args, MessageEmbed);
 	},
 };

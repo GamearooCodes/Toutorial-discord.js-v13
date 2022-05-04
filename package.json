@@ -10,11 +10,13 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
+		"@classycrafter/super-logger": "^1.2.34",
 		"axios": "^0.21.4",
+		"discord-helper.js": "^1.1.2",
 		"discord.js": "^13.1.0",
 		"moment": "^2.29.1",
 		"mongoose": "^5.13.7",
-		"ram-api.js": "^5.0.0",
+		"ram-api.js": "^7.1.2",
 		"systeminformation": "^5.9.17",
 		"winston": "^3.3.3",
 		"winston-console-format": "^1.0.8"
