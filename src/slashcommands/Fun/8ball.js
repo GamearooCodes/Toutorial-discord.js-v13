@@ -1,13 +1,14 @@
-const { hello, _8ball } = require("ram-api.js");
+const ramapi = require("ram-api.js");
 const { ramapiversion } = require("../../../config");
 const { ramapikey } = require("../../../secure/token");
-const { Interaction, MessageEmbed } = require("discord.js");
+const { Interaction, MessageEmbed, Permissions } = require("discord.js");
 
 module.exports = {
 	name: "8ball",
 	subcommands: [],
 	usage: "8ball [question]",
 	description: "ask a question",
+	perm: Permissions.FLAGS.ADMINISTRATOR,
 	/**
 	 *
 	 * @param {Interaction} interaction
@@ -17,7 +18,7 @@ module.exports = {
 
 		let q = options.getString("question");
 
-		_8ball(ramapiversion, ramapikey).then((data) => {
+		ramapi.games._8ball(ramapiversion, ramapikey).then((data) => {
 			let embed = new MessageEmbed()
 				.setColor("BLURPLE")
 				.setDescription(`Question: ${q}\nAnswer: ${data.text}`);

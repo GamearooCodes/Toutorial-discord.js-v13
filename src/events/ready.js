@@ -1,16 +1,12 @@
 const axios = require("axios");
+
 const {
-	apiversion,
-	executeconsole,
-	apiversioncheck,
-	versioncheck,
-	consoleinfo,
-	consoleerror,
-	consolewarn,
+	info
 } = require("ram-api.js");
 
 const { ramapiversion } = require("../../config");
 const { Client } = require("discord.js");
+const { consoleinfo } = require("discord-helper.js");
 
 module.exports = {
 	name: "ready",
@@ -56,22 +52,5 @@ module.exports = {
 };
 
 async function check() {
-	versioncheck(ramapiversion)
-		.then((data) => {
-			let { version, supported, outdated, latest } = data;
-
-			if (outdated) {
-				if (!supported) {
-					return consoleerror(
-						`${version} is no longer supported latest version is ${latest}`
-					);
-				}
-				consolewarn(
-					`${version} is outdated but still supported latest version is ${latest}`
-				);
-			} else {
-				consoleinfo(`${version} is the latest version for ram api`);
-			}
-		})
-		.catch((err) => console.log(err));
+	info.version_check(ramapiversion);
 }

@@ -1,5 +1,5 @@
-const { Client, MessageEmbed, Message } = require("discord.js");
-const { apihello, executeconsole, hello } = require("ram-api.js");
+const { Client, MessageEmbed, Message, Permissions } = require("discord.js");
+const ramapi = require("ram-api.js");
 const { ramapiversion } = require("../../../config");
 const { ramapikey } = require("../../../secure/token");
 
@@ -8,6 +8,7 @@ module.exports = {
 	desc: "get a hello from the bot",
 	category: "Fun",
 	usage: "hello",
+	perm: [Permissions.FLAGS.BAN_MEMBERS, Permissions.FLAGS.KICK_MEMBERS],
 	/**
 	 *
 	 * @param {Client} client
@@ -15,7 +16,7 @@ module.exports = {
 	 * @param {MessageEmbed} MessageEmbed
 	 */
 	async execute(client, message, args, MessageEmbed) {
-		await hello(ramapiversion, ramapikey, "spanish")
+		await ramapi.fun.hello(ramapiversion, ramapikey, "spanish")
 			.then((data) => {
 				message.reply({
 					content: data.text,

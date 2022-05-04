@@ -7,7 +7,7 @@ const client = new Client({
 
 client.events = new Collection();
 
-require("../rpc");
+
 
 client.commands = new Collection();
 
