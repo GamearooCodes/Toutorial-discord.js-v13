@@ -14,17 +14,20 @@ client.commands = new Collection();
 client.slash = new Collection();
 
 //config
-const { prefix, version } = require("../config");
+const { prefix, version, beta } = require("../config");
 //token
 const { token } = require("../secure/token");
 
-["event", "command", "slash"].forEach((hand) => {
-	require(`./Utils/${hand}`)(client);
-});
+
+
+
 
 //ready event
 
 client.on("ready", async () => {
+	await ["event", "command", "slash"].forEach((hand) => {
+		require(`./Utils/${hand}`)(client);
+	});
 	await client.events.get("ready").execute(version, client);
 });
 

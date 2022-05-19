@@ -30,24 +30,8 @@ module.exports = {
 
 		await check();
 
-		var commands = client.application.commands;
+		
 
-		commands?.create({
-			name: "hello",
-			description: "ask a question",
-		});
-		commands?.create({
-			name: "8ball",
-			description: "ask a question",
-			options: [
-				{
-					name: "question",
-					description: "question to ask",
-					type: "STRING",
-					required: true,
-				},
-			],
-		});
 	},
 };
 
