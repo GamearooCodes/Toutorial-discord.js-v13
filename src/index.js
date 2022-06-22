@@ -16,11 +16,17 @@ client.slash = new Collection();
 //config
 const { prefix, version, beta } = require("../config");
 //token
-const { token } = require("../secure/token");
+const { token, mongourl } = require("../secure/token");
 
 
-
-
+const mongoose = require("mongoose");
+mongoose
+	.connect(mongourl, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+		useFindAndModify: true,
+	})
+	.then(console.log("Mongo Activated.. On Bot!"));
 
 //ready event
 
